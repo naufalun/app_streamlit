@@ -19,7 +19,7 @@ if menu == 'Luas Persegi':
 
 elif menu == 'Luas Segitiga':
     st.write('Ini halaman untuk menghitung luas segitiga')
-    st.image('segitiga.jpg')
+    st.image('https://cdn-web.ruangguru.com/landing-pages/assets/hs/Rumus%20Luas%20Segitiga%20Jika%20Diketahui%20Alas%20dan%20Tinggi%20-%20Matematika%20Kelas%207.png', caption='Gambar segitiga')
     alas = st.number_input('silahkan masukan nilai alas', min_value=0)
     tinggi = st.number_input('silahkan masukan nilai tinggi',min_value=0)
     if st.button('hitung'):
@@ -29,7 +29,7 @@ elif menu == 'Luas Segitiga':
 
 elif menu == 'Luas Lingkaran':
     st.write('Ini halaman untuk menghitung luas lingkaran')
-    st.image('lingkaran.png')
+    st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SJZsyUftp3kI9I4thgtmn3qurPNtIt9L3w&s', caption='gambar lingkaran')
     jari_jari = st.number_input('silahkan masukkan nilai jari-jari', min_value=0)
     if st.button('hitung'):
         luas = math.pi * (jari_jari**2)
@@ -37,7 +37,7 @@ elif menu == 'Luas Lingkaran':
 
 elif menu == "Luas Persegi Panjang":
     st.write('ini halaman untuk menghitung luas persegi panjang')
-    st.image('persegi panjang.png')
+    st.image('https://www.doyanblog.com/wp-content/uploads/2021/12/rumus-persegi-panjang.jpg', caption='gambar persegi panjang')
     panjang = st.number_input('silahkan masukkan nilai panjang', min_value=0)
     lebar = st.number_input('silahkan masukkan nilai lebar', min_value=0)
     if st.button('hitung'):
