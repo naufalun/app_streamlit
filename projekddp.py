@@ -48,13 +48,15 @@ def simulasi_progress(berat_awal, target, defisit):
     berat = berat_awal
     minggu = 0
 
-    while berat > target:
-        berat -= defisit
+    while berat - defisit > target:
         minggu += 1
+        berat -= defisit
         hasil.append((minggu, round(berat, 1)))
 
-        if minggu > 52:  # batas agar tidak infinite loop
-            break
+    minggu += 1
+    hasil.append((minggu, target))
+        # if minggu > 52:  # batas agar tidak infinite loop
+        #     break
 
     return hasil
 
@@ -82,10 +84,10 @@ if menu == "Hitung Kebutuhan Kalori":
 
     col1, col2 = st.columns(2)
     with col1:
-        berat = st.number_input("Berat (kg)", value=60)
-        tinggi = st.number_input("Tinggi (cm)", value=165)
+        berat = st.number_input("Berat (kg)", min_value=0, value=60)
+        tinggi = st.number_input("Tinggi (cm)", min_value=0, value=165)
     with col2:
-        usia = st.number_input("Usia", value=20)
+        usia = st.number_input("Usia", min_value=0, value=20)
         aktivitas = st.selectbox("Aktivitas", ["Ringan", "Sedang", "Berat"])
 
     if st.button("Hitung"):
@@ -99,7 +101,7 @@ if menu == "Hitung Kebutuhan Kalori":
 elif menu == "Rekomendasi Menu Diet":
     st.header("🥗 Rekomendasi Menu Diet")
 
-    target_kalori = st.number_input("Target Kalori Harian", value=1500)
+    target_kalori = st.number_input("Target Kalori Harian", min_value=0, value=1500)
 
     if st.button("Buat Menu"):
         menu_harian, total = susun_menu(target_kalori)
@@ -120,18 +122,32 @@ elif menu == "Rekomendasi Menu Diet":
 elif menu == "Simulasi Progress Berat Badan":
     st.header("📉 Simulasi Progress Diet")
 
-    berat_awal = st.number_input("Berat awal (kg)", value=70)
-    target_berat = st.number_input("Target berat (kg)", value=60)
-    defisit = st.number_input("Penurunan per minggu (kg)", value=0.5)
+    berat_awal = st.number_input("Berat awal (kg)", min_value=0, value=70)
+    target_berat = st.number_input("Target berat (kg)", min_value=0, value=60)
+    defisit = st.number_input("Penurunan per minggu (kg)", min_value=0.0, value=0.5)
 
     if st.button("Simulasikan"):
-        hasil = simulasi_progress(berat_awal, target_berat, defisit)
+        # hasil = simulasi_progress(berat_awal, target_berat, defisit)
 
-        if len(hasil) == 0:
-            st.warning("Target harus lebih rendah dari berat awal.")
-        else:
+        # if len(hasil) == 0:
+        #     st.warning("Target harus lebih rendah dari berat awal.")
+        # else:
+        #     st.subheader("Perjalanan Mingguan:")
+        #     for minggu, b in hasil:
+        #         st.write(f"Minggu {minggu}: {b} kg")
+
+        #     st.success(f"Mencapai target dalam **{len(hasil)} minggu**")
+
+        if target_berat >=berat_awal :
+            st.warning ("target berat harus lebih kecil dari berat awal")
+        elif defisit <= 0:
+            st.warning ("penurunan per minggu harus lebih dari 0")
+        else :
+            hasil = simulasi_progress(berat_awal, target_berat, defisit)
+
             st.subheader("Perjalanan Mingguan:")
             for minggu, b in hasil:
                 st.write(f"Minggu {minggu}: {b} kg")
 
             st.success(f"Mencapai target dalam **{len(hasil)} minggu**")
+
