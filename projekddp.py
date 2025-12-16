@@ -1,22 +1,19 @@
 import streamlit as st
 
-# -------------------------------
+
 # DATA MAKANAN
-# -------------------------------
 makanan = [
-    {"nama": "Oatmeal", "kalori": 150},
-    {"nama": "Telur Rebus", "kalori": 78},
-    {"nama": "Ayam Panggang", "kalori": 210},
-    {"nama": "Nasi Merah", "kalori": 180},
-    {"nama": "Alpukat", "kalori": 160},
-    {"nama": "Salmon", "kalori": 250},
-    {"nama": "Broccoli", "kalori": 55},
+    {"nama": "Oatmeal : tinggi serat larut (beta-glucan) yang membuat kenyang lebih lama.", "kalori": 160},
+    {"nama": "Telur Rebus : lebih rendah kalori dan tinggi protein sehingga membantu mencapai target defisit kalori.", "kalori": 63},
+    {"nama": "Ayam Panggang : tinggi protein, rendah lemak & protein sehingga cocok untuk diet dan pembentukan otot.", "kalori": 260},
+    {"nama": "Nasi Merah : tinggi serat dan kerbohidrat kompleks.", "kalori": 120},
+    {"nama": "Alpukat : tinggi lemak sehat (asam oleat) dan serat yang bikin kenyang lebih lama, sehingga mengurangi keinginan makan berlebih.", "kalori": 160},
+    {"nama": "Salmon : kaya protein berkualitas tinggi dan mengandung lemak sehat.", "kalori": 200},
+    {"nama": "Brokoli : tinggi kandungan serat dan kalsium yang penting untuk diet.", "kalori": 35},
 ]
 
 
-# -------------------------------
 # FUNCTION 1: Hitung kebutuhan kalori
-# -------------------------------
 def hitung_kebutuhan_kalori(berat, tinggi, usia, aktivitas):
     bmr = 10 * berat + 6.25 * tinggi - 5 * usia + 5
     faktor = {
@@ -27,9 +24,8 @@ def hitung_kebutuhan_kalori(berat, tinggi, usia, aktivitas):
     return int(bmr * faktor[aktivitas])
 
 
-# -------------------------------
+
 # FUNCTION 2: Susun menu
-# -------------------------------
 def susun_menu(target_kalori):
     total = 0
     menu = []
@@ -40,9 +36,7 @@ def susun_menu(target_kalori):
     return menu, total
 
 
-# -------------------------------
 # FUNCTION 3: Simulasi progress
-# -------------------------------
 def simulasi_progress(berat_awal, target, defisit):
     hasil = []
     berat = berat_awal
@@ -61,11 +55,10 @@ def simulasi_progress(berat_awal, target, defisit):
     return hasil
 
 
-# -------------------------------
+
 # STREAMLIT UI
-# -------------------------------
 st.set_page_config(layout="wide")
-st.title("🌿 Aplikasi Diet & Nutrisi")
+st.title("Aplikasi Diet & Nutrisi")
 
 # SIDEBAR NAV
 menu = st.sidebar.selectbox(
@@ -73,12 +66,11 @@ menu = st.sidebar.selectbox(
     ["Hitung Kebutuhan Kalori", "Rekomendasi Menu Diet", "Simulasi Progress Berat Badan"]
 )
 
-st.sidebar.write("Navigasi fitur ada di sini.")
+st.sidebar.write("Silahkan pilih jenis aplikasi.")
 
 
-# --------------------------------------------------------
+
 # FITUR 1: Hitung kebutuhan kalori
-# --------------------------------------------------------
 if menu == "Hitung Kebutuhan Kalori":
     st.header("🔥 Hitung Kebutuhan Kalori Harian")
 
@@ -95,9 +87,8 @@ if menu == "Hitung Kebutuhan Kalori":
         st.success(f"Total kebutuhan kalori harianmu adalah **{hasil} kcal**")
 
 
-# --------------------------------------------------------
+
 # FITUR 2: Rekomendasi Menu Diet
-# --------------------------------------------------------
 elif menu == "Rekomendasi Menu Diet":
     st.header("🥗 Rekomendasi Menu Diet")
 
@@ -114,11 +105,10 @@ elif menu == "Rekomendasi Menu Diet":
             st.success(f"Total kalori: **{total} kcal**")
         else:
             st.warning("Tidak ada makanan yang cocok untuk target ini.")
+    st.image('streamlit.png')
 
 
-# --------------------------------------------------------
 # FITUR 3: Simulasi Progress Berat Badan
-# --------------------------------------------------------
 elif menu == "Simulasi Progress Berat Badan":
     st.header("📉 Simulasi Progress Diet")
 
