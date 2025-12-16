@@ -91,6 +91,7 @@ if menu == "Hitung Kebutuhan Kalori":
 # FITUR 2: Rekomendasi Menu Diet
 elif menu == "Rekomendasi Menu Diet":
     st.header("🥗 Rekomendasi Menu Diet")
+    st.image('streamlit.png', width=600)
 
     target_kalori = st.number_input("Target Kalori Harian", min_value=0, value=1500)
 
@@ -105,7 +106,6 @@ elif menu == "Rekomendasi Menu Diet":
             st.success(f"Total kalori: **{total} kcal**")
         else:
             st.warning("Tidak ada makanan yang cocok untuk target ini.")
-    st.image('streamlit.png')
 
 
 # FITUR 3: Simulasi Progress Berat Badan
